@@ -1,0 +1,100 @@
+curl命令、wireshark、fiddler TODO：
+wireshark：https://www.cnblogs.com/cocowool/p/wireshark_tcp_http.html
+
+一、OSI七层网络模型：
+应用层     （应用层）   （应用层）
+表示层     （应用层）   （应用层）
+会话层     （应用层）   （应用层）
+传输层     （传输层）   （传输层）
+网络层     （网络层）   （网络层）
+数据链路层  （数据链路层）（网络接口层）
+物理层     （网络接口层）（网络接口层）
+
+TCP与UDP的区别：
+TCP：面向链接、错误重传、拥塞控制，适用于可靠性高的场景；（三次握手、四次挥手）
+UDP：不需要提前建立链接，实现简单，适用于实时性高的场景；
+
+二、postman：
+1、设置环境变量，设置好了之后通过{{变量名}}来引用；
+2、设置测试用例断言；
+3、添加cookie，postman能够自动保存cookie，或者获取cookies之后保存到环境变量再引用；
+4、参数传递（上一个接口的返回值响应作为下一个接口的参数）：通过上一个接口获取需要的返回值，然后在test中通过脚步将需要的值保存到环境变量中，
+    在下一个接口中通过{{变量名}}来引用刚刚保存的环境变量值；
+    “”“
+    var jsonData = pm.response.json();
+    var token = jsonData.json.token;
+    pm.environment.set("token", token);
+    ”“”
+5、测试用例集：
+    a、将调试好的所有的接口测试用例保存到同一个collection中；
+    b、运行的时候可以选择环境变量、执行次数、每次之间的间隔时间、选择测试数据（数据驱动）、点击run执行；
+6、数据驱动：json或者scv（txt）格式，用来充当value值；
+    a、将之前测试用例中写死的value值用变量来代替，格式：{{文件中定义好的字段名}}；
+    b、在运行界面Data选项中选择准备好的数据文件，选择之后可以预览数据；
+    c、有的postman版本，当选择了数据文件之后会根据数据条数自动设置执行次数，但是有的不会自动填入次数，需要手动填入（次数可以任意填入整数，
+    但是需要注意对应次数的数据匹配关系）；
+7、导出用例为代码：在接口页面点击code，导出为相应语言的代码；
+
+postman+newman：
+命令格式：
+newman run 用例集绝对路径 -g 环境变量集绝对路径 --reporters html --report-html-export 测试报告路径
+
+案例：
+newman run C:\Users\Administrator\Desktop\hogwarts_api.postman_collection.json -g C:\Users\Administrator\Desktop\hogwarts_test.postman_environment.json --reporters html --reporter-html-export C:\Users\Administrator\Desktop\temp.html
+
+三、Charles
+四、mitmproxy：
+参考：https://www.jianshu.com/p/a800fac97eca
+1、安装：pip install pipx
+        pipx install mitmproxy
+2、工具组成：
+    mitmproxy：虽然是命令工具，但是可以显示详细的交互过程，不是夸平台的，只能在mac或者linux上使用；
+    mitmdump：命令行代理工具，夸平台；
+    mitmweb：UI界面工具，很像Chrome的network功能；
+3、安装证书：下载地址mitm.it
+    a、必须先开启mitmproxy代理然后再去下载证书---命令：mitmdump -p 端口（电脑已设置代理）；
+    b、安装证书；
+4、录制回放
+5、脚本
+
+五、接口测试流程
+1、测试范围：需要覆盖多少业务和接口；
+2、产品分析：接口的协议、上下游依赖--抓包分析；
+3、用例设计：业务用例如何模拟和覆盖；
+4、工具选型：选择合适的框架；
+5、维护管理：用例编写与维护更新；
+6、持续集成：不断集成测试；
+
+测试范围：
+1、业务需求调研：研发和产品反馈常出问题的业务；
+2、接口文档：人工文档、swagger自动生成的文档；
+3、代码分析：分析spring等框架的代码；
+4、线上log和数据：线上的生产监控和接口log；
+5、客户端抓包：基于用户角度的接口行为分析（接口调用的流程分析）；
+
+用例设计：
+1、人工用例补充：用流程图和思维导图进行业务建模；
+2、正常场景用例right path；
+3、异常场景用例；
+4、安全和稳定性用例；
+5、常见的等价类边界值、业务流、决策树、决策表；
+
+开源测试框架：Python：requests、httprunner
+
+测试框架基本能力：
+项目管理：pip virtualenv
+用例编写：pytest，用例的标签、前置后置的操作、分组、依赖关系等
+领域能力：app web http
+执行调度：pytest pycharm shell Jenkins
+测试报告：allure2
+
+用例原则：
+1、用例执行前需要有初始化操作；
+2、每个用例尽量的独立，不依赖其他用例；
+3、多api的测试用例代码不冗余；
+
+requests框架参考链接：
+参考1：https://requests.readthedocs.io/zh_CN/latest/user/quickstart.html
+参考2：https://blog.csdn.net/byweiker/article/details/79234853
+参考3：https://www.cnblogs.com/wxlog/p/10731540.html
+中文api文档：https://requests.readthedocs.io/zh_CN/latest/

@@ -1,0 +1,23 @@
+[
+  {
+	"username":"hog1",
+	"password":"hog1_password",
+	"token":"hog1_token"
+  },{
+	"username":"hog2",
+	"password":"hog2_password",
+	"token":"hog2_token"
+  },{
+	"username":"hog3",
+	"password":"hog3_password",
+	"token":"hog3_token"
+  },{
+	"username":"hog4",
+	"password":"hog4_password",
+	"token":"hog4_token"
+  },{
+	"username":"hog5",
+	"password":"hog5_password",
+	"token":"hog5_token"
+  }
+]
