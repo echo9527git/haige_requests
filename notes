@@ -57,6 +57,9 @@ newman run C:\Users\Administrator\Desktop\hogwarts_api.postman_collection.json -
 4、录制回放
 5、脚本
 
+mitmproxy模块使用：
+1、固定入口：def request(flow: http.HTTPFlow，这是脚步的固定唯一格式；
+
 五、接口测试流程
 1、测试范围：需要覆盖多少业务和接口；
 2、产品分析：接口的协议、上下游依赖--抓包分析；
@@ -98,3 +101,7 @@ requests框架参考链接：
 参考2：https://blog.csdn.net/byweiker/article/details/79234853
 参考3：https://www.cnblogs.com/wxlog/p/10731540.html
 中文api文档：https://requests.readthedocs.io/zh_CN/latest/
+
+
+
+git修改
