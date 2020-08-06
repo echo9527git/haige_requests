@@ -15,7 +15,7 @@ class TestWework:
         })
         assert r.status_code == 200
         print(r.json())
-        self.access_token = r.json()['access_token']
+        self.access_token = r.json()['access_token_3']
 
     def setup(self):
         pass
@@ -24,7 +24,7 @@ class TestWework:
     def test_tags_list(self):
         # 获取企业标签库
         r = requests.post('https://qyapi.weixin.qq.com/cgi-bin/externalcontact/get_corp_tag_list',params={
-            'access_token':self.access_token
+            'access_token_3':self.access_token
         })
         assert r.status_code == 200
         self.print_json(r)
@@ -38,7 +38,7 @@ class TestWework:
         group_name = 'group_普通客户'
         tag_name = 'name_砖石'
         r = requests.post('https://qyapi.weixin.qq.com/cgi-bin/externalcontact/add_corp_tag',
-            params={'access_token':self.access_token},
+            params={'access_token_3':self.access_token},
             json = {
                 "group_name": group_name,
                 "tag":[{"name": tag_name}]
@@ -51,7 +51,7 @@ class TestWework:
     def test_del_corp_tag(self):
         # 获取企业标签库--封装复用
         r = requests.post('https://qyapi.weixin.qq.com/cgi-bin/externalcontact/get_corp_tag_list', params={
-            'access_token': self.access_token
+            'access_token_3': self.access_token
         })
 
         # 遍历获取到需要删除的tag_id
@@ -63,7 +63,7 @@ class TestWework:
 
         # 删除指定tag_id的标签
         r = requests.post('https://qyapi.weixin.qq.com/cgi-bin/externalcontact/del_corp_tag',
-            params = {'access_token':self.access_token},
+            params = {'access_token_3':self.access_token},
             json={
                 'tag_id':[tag_id]
             }
