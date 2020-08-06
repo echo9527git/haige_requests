@@ -61,6 +61,7 @@ def test_create_data():
     print(data)
     return data
 
+
 @pytest.mark.parametrize("userid,name,mobile",test_create_data())
 def test_all(userid,name,mobile,test_token):
     # 先获取一个我需要添加的成员看是否存在，如果存在就先删除再创建，或者是：在创建的时候看是否会出现已经存在该id的异常进行处理
