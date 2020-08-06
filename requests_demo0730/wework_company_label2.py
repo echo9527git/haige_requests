@@ -21,20 +21,20 @@ class WWCompanyLabel:
             'corpid': _corpid,
             'corpsecret': _corpsecret
         })
-        self.access_token = r.json()['access_token_3']
+        self.access_token = r.json()['access_token']
         return self.access_token
 
     # 获取企业标签库
     def get_corp_tag_list(self):
         r = requests.post(self._baseurl+'/externalcontact/get_corp_tag_list', params={
-            'access_token_3': self.access_token
+            'access_token': self.access_token
         })
         return r
 
     # 添加企业客户标签---两个都是必填参数
     def add_corp_tag(self,group_name,tag_name):
         r = requests.post(self._baseurl+'/externalcontact/add_corp_tag',
-                          params={'access_token_3': self.access_token},
+                          params={'access_token': self.access_token},
                           json={
                               "group_name": group_name,
                               "tag": [{"name": tag_name}]
@@ -61,7 +61,7 @@ class WWCompanyLabel:
             json = {'tag_id': [tag_id]}
 
         r = requests.post(self._baseurl+'/externalcontact/del_corp_tag',
-                      params={'access_token_3': self.access_token},
+                      params={'access_token': self.access_token},
                       json=json
         )
         return r
