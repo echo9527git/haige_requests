@@ -1,8 +1,8 @@
-import requests
 from jsonpath import jsonpath
-from requests_demo0730 import utils
 from hamcrest import *
-
+from requests_demo0730 import utils
+import requests
+from requests.auth import HTTPBasicAuth
 class TestHog1:
     def test_get(self):
         r = requests.get("http://httpbin.testing-studio.com/get")
@@ -63,3 +63,20 @@ class TestHog1:
         utils.print_json(r)
         assert_that(r.json()['category_list']['categories'][1]['name'],equal_to('开源项目'))
         assert_that(jsonpath(r.json(), '$..name')[1],equal_to('开源项目'))
+
+    def test_cookies1(self):
+        url = 'http://httpbin.testing-studio.com/cookies'
+        headers = {'Cookie':'echo'}
+        r = requests.get(url=url,headers = headers)
+        utils.print_json(r)
+
+    def test_cookies2(self):
+        url = 'http://httpbin.testing-studio.com/cookies'
+        headers = {'User-Agent':'echo'}
+        cookies = {'cookie1':'echo1','cookies2':'echo2'}
+        r = requests.get(url=url,headers = headers,cookies = cookies)
+        utils.print_json(r)
+
+    def test_auth(self):
+        r = requests.get('http://httpbin.testing-studio.com/basic-auth/echo/1234',auth=HTTPBasicAuth('echo','1234'))
+        print(r.status_code)
