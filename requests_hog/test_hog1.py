@@ -1,8 +1,7 @@
 import requests
-
-from requests_demo0730 import utils
 from jsonpath import jsonpath
-
+from requests_demo0730 import utils
+from hamcrest import *
 
 class TestHog1:
     def test_get(self):
@@ -58,3 +57,9 @@ class TestHog1:
         utils.print_json(r)
         assert r.json()['category_list']['categories'][1]['name'] == '开源项目'
         assert jsonpath(r.json(),'$..name')[1] == '开源项目'
+
+    def test_hamcrest(self):
+        r = requests.get('https://ceshiren.com/categories.json')
+        utils.print_json(r)
+        assert_that(r.json()['category_list']['categories'][1]['name'],equal_to('开源项目'))
+        assert_that(jsonpath(r.json(), '$..name')[1],equal_to('开源项目'))
