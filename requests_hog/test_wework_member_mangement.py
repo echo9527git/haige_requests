@@ -53,7 +53,7 @@ def test_delete(userid,test_token):
     return r.json()
 
 def test_create_data():
-    # data = [(str(random.randint(0,9999999)),
+    # send_data = [(str(random.randint(0,9999999)),
     #          "zhangsan",
     #          str(random.randint(13888880000, 13888889999))) for x in range(0,10)]
 

@@ -1,7 +1,7 @@
 def request(flow):
     flow.request.headers["myheader"] = "value"
 
-"""Send a reply from the proxy without sending any data to the remote server."""
+"""Send a reply from the proxy without sending any send_data to the remote server."""
 from mitmproxy import http
 
 # def request(flow: http.HTTPFlow) -> None:
