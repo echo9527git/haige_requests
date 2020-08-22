@@ -1,0 +1,9 @@
+json: null
+method: get
+params: {corpid: $corpid, corpsecret: $corpsecret}
+url: https://qyapi.weixin.qq.com/cgi-bin/gettoken
+
+#json: null
+#method: get
+#params: {corpid: ww3c6b51ae743ae4ec, corpsecret: xvmyVvTMnJaR0q2eitVBAOqJA-vQKt6zPjpQXixT8do}
+#url: https://qyapi.weixin.qq.com/cgi-bin/gettoken

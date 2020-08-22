@@ -3,9 +3,6 @@ import re
 import pytest
 import requests
 
-from requests import request
-requests.get
-requests.post
 
 from test_wework.utils import utils
 from test_wework.wework_interface.member_mangement import MemberMengement
